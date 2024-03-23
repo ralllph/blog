@@ -1,4 +1,4 @@
-//get dependencies
+// //get dependencies
 const express = require('express');
 const path = require('path');
 let getApp = express();
@@ -10,6 +10,11 @@ getApp.set('view engine', 'ejs');
 
 //use body parser
 getApp.use(express.urlencoded({extended:true}));
+
+// Set Different Routes
+getApp.get('/',function(req,res) {
+    res.render('home'); 
+});
 
 // Setup Database Connection
 const mongoose = require('mongoose');
@@ -23,13 +28,13 @@ const Post = mongoose.model('post', {
 
 });
 
+//validation checker
+const {check, validationResult} = require('express-validator');
 
 //routes 
-myApp.post('/', [
+getApp.post('/', [
     check('name', 'Name is required!').notEmpty(),
     check('email', 'Please enter valid email address!').isEmail(),
-    check('phone','').custom(customPhoneValidation),
-    check('lunch').custom(customLunchAndTicketValidation)
 ], function(req,res){
     const errors = validationResult(req);
     console.log(errors);
@@ -58,10 +63,4 @@ myApp.post('/', [
     }   
 });
 
-// Set Different Routes (Pages)
-getApp.get('/',function(req,res) {
-    res.render('');     // No need to add .ejs extension
-});
-
-//validation checker
-const {check, validationResult} = require('express-validator');
+getApp.listen(8080);
