@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('layouts/head'); -%>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+    </head>
+<body>
+
+    <div class="home-container">
+
+        <!-- Header -->
+        <%- include('layouts/header'); -%>
+
+         <!-- Nav section -->
+         <%- include('layouts/nav'); -%>
+
+         <main class="login-main-form-content">
+            <h1>Login</h1>
+            <div class="login-form-container">
+                <form action="" class="login-form-content"  name="logins-form" onsubmit="return formSubmit();"  method="post"> 
+                    <div>
+                        <label for="username">Username:</label>
+                        <input id="username" type="text" placeholder="Surname First Name" name="username"/>
+                     </div>
+                     <div>
+                        <label for="password">Password:</label>
+                        <input id="password" type="password" placeholder="xxxxxx" name="password"/>
+                     </div>
+    
+                     <div class="login-submit-cont"> 
+                        <div class="login-form-submit">
+                                <input class="login-styled-form-checkout-button" type="submit" value="submit" > 
+                        </div>
+                    </div>
+    
+                </form>
+    
+                <div class="login-div-errors"> 
+                <p id="form-errors" > 
+                    <% if(typeof(errors) != 'undefined') { %>
+                        Errors detected: 
+                      <%  for(let error of errors) { %>
+                            <br><%= error.msg %>
+                       <% } %>
+                    <%} %>
+                </p>
+                </div>
+            </div>
+    
+        </main>
+
+         <!-- Footer -->
+         <%- include('layouts/footer'); -%>
+
+     </div>
+</body>
+</html>
