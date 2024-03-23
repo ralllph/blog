@@ -15,8 +15,13 @@ getApp.use(express.urlencoded({extended:true}));
 getApp.get('/',function(req,res) {
     res.render('home'); 
 });
+
 getApp.get('/login',function(req,res) {
     res.render('login'); 
+});
+
+getApp.get('/addPosts',function(req,res) {
+    res.render('addposts'); 
 });
 
 // Setup Database Connection
