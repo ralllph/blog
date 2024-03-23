@@ -1,0 +1,179 @@
+/* General styling */
+.home-container{
+    width: 80%;
+    margin:20px auto;
+}
+
+
+/* header section */
+.home-header{
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to bottom right, rgba(96, 11, 120, 0.678), rgb(97, 11, 120));
+    color: white;
+    border-radius: 10px;
+}
+
+.home-logo-tagline{
+   display: flex;
+   align-items: center;
+   width: 55%;
+   justify-content: space-between;
+}
+
+.home-logo-img-container{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+.home-logo-img-container>a>img{
+    width: 100%;
+    display: block;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* Nav section */
+.home-nav{
+    text-align: center;
+    padding: 10px;
+}
+
+.home-nav a{
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.home-nav-tier1-list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.home-nav-tier1-list>li{
+    display: inline-block;
+    position:relative;
+}
+
+.home-nav-tier2-list{
+    list-style-type: none;
+    position: absolute;
+    width: 200px;
+    background-color: rgba(240, 240, 240, 0.91);
+    text-align: left;
+    box-shadow: 0 0 5px rgb(6,57,107); 
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    transition: 1s ease-in-out;
+}
+
+.home-nav-tier1-list li:hover ul{
+    display: block;
+    opacity: 1;
+    max-height: 300px;
+    visibility: visible;
+    padding: 0;
+}
+
+.home-nav-tier2-list li a{
+    color: rgb(6,57,107);  
+    display: block;
+    padding: 10px;
+}
+
+
+.home-nav-tier2-list li:hover a:hover{
+    background-color: rgb(141,228,175);  
+    color: black;
+}
+
+.home-nav-link,.home-nav-sublink{
+    text-decoration: none;
+    padding: 0 30px;
+    color: purple;
+}
+
+.home-nav-link:hover{
+    color: #6a0dad; 
+}
+
+/* hero section */
+.home-hero-section{
+    background-image: url("../images/hero1.jpg");
+    height: 500px;
+    background-size: cover;
+    background-position: center calc(25% - 100px);
+    border-radius: 20px;
+}
+
+/* About section */
+.home-about-section>h2{
+    text-align: center;
+    color: purple;
+}
+
+/* Footer section */
+.home-footer{
+    padding: 14px;
+    border-radius: 5px;
+    text-align: center;
+    background: linear-gradient(to bottom right, rgba(96, 11, 120, 0.678), rgb(97, 11, 120));
+    color: white;
+}
+
+
+/* Form Styling */
+.login-main-form-content,.login-main-form-content-invoice{
+    color: black;
+    width: 35%;
+    margin: auto;
+    background: linear-gradient(to bottom right, rgba(96, 11, 120, 0.678), rgb(97, 11, 120));
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    p{
+        text-align: center;
+        span{
+            color: white;
+        }
+    }
+}
+.login-form-content{
+    display: flex;
+    flex-direction: column;
+    div{
+        margin-top: 20px;
+        label{
+            margin-right: 10px;
+        }
+    }
+}
+
+
+#form-errors{
+    color: white;
+    font-size: 20px;
+}
+
+.login-styled-form-checkout-button{
+    display: inline-block;
+    padding: 10px 40px;
+    margin: 5px;
+    background-color:  white;
+    color: black;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.login-styled-form-checkout-button:hover{
+    background-color: plum;
+}
