@@ -15,6 +15,9 @@ getApp.use(express.urlencoded({extended:true}));
 getApp.get('/',function(req,res) {
     res.render('home'); 
 });
+getApp.get('/login',function(req,res) {
+    res.render('login'); 
+});
 
 // Setup Database Connection
 const mongoose = require('mongoose');

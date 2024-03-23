@@ -1,13 +1,11 @@
+/* General styling */
 .home-container{
     width: 80%;
     margin:20px auto;
-    min-height: 100%;
-    margin-bottom: -8px;
 }
 
-/* Header section */
-/* header section */
 
+/* header section */
 .home-header{
     display: flex;
     align-items: center;
@@ -102,7 +100,7 @@
     color: #6a0dad; 
 }
 
-/* ero section */
+/* hero section */
 .home-hero-section{
     background-image: url("../images/hero1.jpg");
     height: 500px;
@@ -124,5 +122,58 @@
     text-align: center;
     background: linear-gradient(to bottom right, rgba(96, 11, 120, 0.678), rgb(97, 11, 120));
     color: white;
-    margin-bottom: 0;
+}
+
+
+/* Form Styling */
+.login-main-form-content,.login-main-form-content-invoice{
+    color: black;
+    width: 35%;
+    margin: auto;
+    background: linear-gradient(to bottom right, rgba(96, 11, 120, 0.678), rgb(97, 11, 120));
+    color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    p{
+        text-align: center;
+        span{
+            color: white;
+        }
+    }
+}
+.login-form-content{
+    display: flex;
+    flex-direction: column;
+    div{
+        margin-top: 20px;
+        label{
+            margin-right: 10px;
+        }
+    }
+}
+
+
+#form-errors{
+    color: white;
+    font-size: 20px;
+}
+
+.login-styled-form-checkout-button{
+    display: inline-block;
+    padding: 10px 40px;
+    margin: 5px;
+    background-color:  white;
+    color: black;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.login-styled-form-checkout-button:hover{
+    background-color: plum;
 }
