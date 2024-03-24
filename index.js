@@ -1,6 +1,7 @@
 // //get dependencies
 const express = require('express');
 const path = require('path');
+const upload = require('express-fileupload');
 let getApp = express();
 
 //set directories
@@ -8,15 +9,21 @@ getApp.set('views', path.join(__dirname,'views'));
 getApp.use(express.static(__dirname + '/public'));
 getApp.set('view engine', 'ejs');
 
-//use body parser
+//use dependencies
 getApp.use(express.urlencoded({extended:true}));
+getApp.use(upload());
 
 // Set Different Routes
 getApp.get('/',function(req,res) {
     res.render('home'); 
 });
-getApp.get('/login',function(req,res) {
-    res.render('login'); 
+
+getApp.get('/getApp',function(req,res) {
+    res.render('getApp'); 
+});
+
+getApp.get('/addPosts',function(req,res) {
+    res.render('addposts'); 
 });
 
 // Setup Database Connection
@@ -28,41 +35,61 @@ mongoose.connect('mongodb://localhost:27017/blog', {
 
 // Setup Database Model
 const Post = mongoose.model('post', {
-
+    name : String,
+    pageTitle : String,
+    desc : String,
+    imageName : String,
+    imageType : String,
+    imageSize : Number
 });
 
 //validation checker
 const {check, validationResult} = require('express-validator');
 
 //routes 
-getApp.post('/', [
-    check('name', 'Name is required!').notEmpty(),
-    check('email', 'Please enter valid email address!').isEmail(),
+getApp.post('/addPosts', [
+    check('pagetitle', 'Page title is required!').notEmpty(),
+    check('desc', 'Description is required!').notEmpty()
 ], function(req,res){
     const errors = validationResult(req);
     console.log(errors);
 
     if(!errors.isEmpty()) {
-       
+       res.render('addPosts', {errors : errors.array()})
     }
     else 
     {
-       
-        // Display Output
-        var pageData = {
-  
-        };
-
-        // Save Form Data into Database
-        let myPosts = new Post(pageData);
-        myOrder.save().then(function(){
-            console.log("New Post Created Successfully!");
-        }).catch(function(ex){
-            console.log(`Database Error: ${ex.toString()}`);
+        let pageTitle = req.body.pagetitle;
+        let desc = req.body.desc;
+        let image = req.files.fileImage;
+        let imageName = image.name;
+        let imagePath = 'public/images/' + imageName;
+        image.mv(imagePath, (err) => {
+            if(err) {
+                console.log(`Error: ${err}`);
+                res.send(err);
+            }
+            else {
+            
+                let postData = {
+                    pageTitle : pageTitle,
+                    desc : desc,
+                    imageName : imageName,
+                    imageType : image.mimetype,
+                    imageSize : image.size
+                }
+    
+                // Save Data Into Database
+                let newPost = new Post(postData);
+                newPost.save().then(function(){
+                    console.log("File Data Saved in Database!");
+                });
+    
+                // Display Output
+                res.send(postData);
+                console.log(postData);
+            }
         });
-
-        // Display Form Output
-        res.render('', pageData); 
     }   
 });
 

@@ -38,6 +38,7 @@
 .home-nav{
     text-align: center;
     padding: 10px;
+
 }
 
 .home-nav a{
@@ -126,7 +127,7 @@
 
 
 /* Form Styling */
-.login-main-form-content,.login-main-form-content-invoice{
+.main-form-content{
     color: black;
     width: 35%;
     margin: auto;
@@ -145,6 +146,12 @@
         }
     }
 }
+
+.submit-cont{
+    display: flex;
+    justify-content: center;
+}
+
 .login-form-content{
     display: flex;
     flex-direction: column;
@@ -158,11 +165,11 @@
 
 
 #form-errors{
-    color: white;
+    color: whitesmoke;
     font-size: 20px;
 }
 
-.login-styled-form-checkout-button{
+.styled-form-checkout-button{
     display: inline-block;
     padding: 10px 40px;
     margin: 5px;
@@ -174,6 +181,12 @@
     font-size: 20px;
 }
 
-.login-styled-form-checkout-button:hover{
+.styled-form-checkout-button:hover{
     background-color: plum;
+}
+
+
+/* add Posts syling */
+.addPosts-form-content{
+    width: 70%;
 }
