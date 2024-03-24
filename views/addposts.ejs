@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <%- include('layouts/head'); -%>
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <script src="https://cdn.tiny.cloud/1/j88n7vsi5hpagmnp5msgytaym6vlj8lwkxa4y7kcn6l2mq4v/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     </head>
 <body>
 
@@ -14,24 +14,44 @@
          <!-- Nav section -->
          <%- include('layouts/nav'); -%>
 
-         <main class="login-main-form-content">
-            <h1>Login</h1>
+         <main class="main-form-content addPosts-form-content">
+            <h1>Lets Talk Karaoke</h1>
             <div class="login-form-container">
-                <form action="" class="login-form-content"  name="logins-form" onsubmit="return formSubmit();"  method="post"> 
+                <form action="" class="login-form-content"  name="logins-form" onsubmit="return formSubmit();" enctype="multipart/form-data"  method="post"> 
                     <div>
-                        <label for="username">Username:</label>
-                        <input id="username" type="text" placeholder="Surname First Name" name="username"/>
+                        <label for="pagetitle">Page Title:</label>
+                        <input id="pagetitle" type="text" placeholder="Page Title" name="pagetitle"/>
                      </div>
                      <div>
-                        <label for="password">Password:</label>
-                        <input id="password" type="password" placeholder="xxxxxx" name="password"/>
+                        <label for="fileImage"> Hero Image: </label>
+                        <input type="file" class="form-input" name="fileImage" id="fileImage"> <br><br>
                      </div>
+                               <!-- WYSIWYG setup -->
+                <script>
+                    tinymce.init({
+                    selector: 'textarea',
+                    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                    tinycomments_mode: 'embedded',
+                    tinycomments_author: 'Author name',
+                    mergetags_list: [
+                        { value: 'First.Name', title: 'First Name' },
+                        { value: 'Email', title: 'Email' },
+                    ],
+                    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+                    });
+            </script>
+            <textarea placeholder="Talk about karaoke">
+            
+            </textarea>
     
-                     <div class="login-submit-cont"> 
-                        <div class="login-form-submit">
-                                <input class="login-styled-form-checkout-button" type="submit" value="submit" > 
+                     <div class="submit-cont"> 
+                        <div >
+                                <input class="styled-form-checkout-button" type="submit" value="submit" > 
                         </div>
                     </div>
+
+               
     
                 </form>
     
@@ -53,5 +73,7 @@
          <%- include('layouts/footer'); -%>
 
      </div>
+
+    
 </body>
 </html>
