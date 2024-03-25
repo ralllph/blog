@@ -2,11 +2,14 @@
 .home-container{
     width: 80%;
     margin:20px auto;
-    color: white;
 }
 
 .centered-text{
     text-align: center;
+}
+
+a{
+    text-decoration: none;
 }
 
 table {
@@ -214,4 +217,12 @@ th {
 /* View pages Styling */
 .view-pages-heading{
     color: purple;
+}
+
+.view-pages-manage-link{
+    color: purple;
+}
+
+.view-pages-manage-link:hover{
+   text-decoration: underline;
 }

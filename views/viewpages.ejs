@@ -29,8 +29,8 @@
                         <% pages.forEach((page) => { %>
                         <tr>
                             <td > <%= page.pageTitle %> </td>
-                            <td > <a href="/edit/<%=page.pageTitle%>">Edit</a></td>
-                            <td>  <a href="/delete/<%=page.pageTitle%>">Delete</a></td>
+                            <td > <a  class="view-pages-manage-link" href="/edit/<%=page.pageTitle%>" >Edit</a></td>
+                            <td>  <a class="view-pages-manage-link"  href="/delete/<%=page.pageTitle%>">Delete</a></td>
                         </tr>
                         <% } ) %>
 
