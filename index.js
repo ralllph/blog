@@ -13,18 +13,7 @@ getApp.set('view engine', 'ejs');
 getApp.use(express.urlencoded({extended:true}));
 getApp.use(upload());
 
-// Set Different Routes
-getApp.get('/',function(req,res) {
-    res.render('home'); 
-});
 
-getApp.get('/getApp',function(req,res) {
-    res.render('getApp'); 
-});
-
-getApp.get('/addPosts',function(req,res) {
-    res.render('addposts'); 
-});
 
 // Setup Database Connection
 const mongoose = require('mongoose');
@@ -46,7 +35,28 @@ const Post = mongoose.model('post', {
 //validation checker
 const {check, validationResult} = require('express-validator');
 
-//routes 
+
+// Set Different Routes
+getApp.get('/',function(req,res) {
+    res.render('home'); 
+});
+
+//view pages
+getApp.get('/viewPages', (req,res) => {
+    Post.find({}).then((pages) => {
+        res.render('viewpages', {pages})
+        console.log(`pages Output: ${pages}`);
+    }). catch((err) => {
+        console.log(`Db Error: ${err}`);
+    })
+});
+
+
+getApp.get('/addPosts',function(req,res) {
+    res.render('addposts'); 
+});
+
+
 getApp.post('/addPosts', [
     check('pagetitle', 'Page title is required!').notEmpty(),
     check('desc', 'Description is required!').notEmpty()
