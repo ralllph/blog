@@ -4,6 +4,28 @@
     margin:20px auto;
 }
 
+.centered-text{
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+   color: black;
+}
+th, td {
+    border: 1px solid plum;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background: linear-gradient(to bottom right, rgba(96, 11, 120, 0.678), rgb(97, 11, 120));
+    color: white;
+}
 
 /* header section */
 .home-header{
@@ -189,4 +211,18 @@
 /* add Posts syling */
 .addPosts-form-content{
     width: 70%;
+}
+
+
+/* View pages Styling */
+.view-pages-heading{
+    color: purple;
+}
+
+.view-pages-manage-link{
+    color: purple;
+}
+
+.view-pages-manage-link:hover{
+   text-decoration: underline;
 }
