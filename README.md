@@ -1,2 +1,2 @@
 # blog
-A blog with admin control access
+A karaoke blog content management system
