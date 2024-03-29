@@ -41,6 +41,10 @@ getApp.get('/',function(req,res) {
     res.render('home'); 
 });
 
+getApp.get('/edit',function(req,res) {
+    res.render('editpage'); 
+});
+
 //view pages
 getApp.get('/viewPages', (req,res) => {
     Post.find({}).then((pages) => {
