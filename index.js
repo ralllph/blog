@@ -45,6 +45,10 @@ getApp.get('/edit',function(req,res) {
     res.render('editpage'); 
 });
 
+getApp.get('/success',function(req,res) {
+    res.render('success'); 
+});
+
 //view pages
 getApp.get('/viewPages', (req,res) => {
     Post.find({}).then((pages) => {
