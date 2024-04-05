@@ -145,6 +145,7 @@ th {
     text-align: center;
     background: linear-gradient(to bottom right, rgba(96, 11, 120, 0.678), rgb(97, 11, 120));
     color: white;
+
 }
 
 
@@ -161,6 +162,7 @@ th {
     justify-content: center;
     align-items: center;
     margin-top: 50px;
+    margin-bottom: 258px;
     p{
         text-align: center;
         span{
@@ -227,6 +229,21 @@ th {
    text-decoration: underline;
 }
 
+.view-page-main{
+    margin-bottom: 450px;
+    display: flex;
+    flex-direction: column;
+}
+.bottom-right{
+    align-self: flex-end;
+}
+.logout-btn{
+    background-color: purple;
+    color: white;
+}
+.logout-btn:hover{
+    background-color: rgba(128, 0, 128, 0.826);
+}
 /* Success page */
 .success-home-cont{
     width: 100%;
@@ -280,4 +297,10 @@ i {
 
  .home-link:hover{
     text-decoration: underline;
+  }
+
+  /* edit single pah=ge styling */
+  .edit-logout{
+    display: flex;
+    justify-content: flex-end;
   }

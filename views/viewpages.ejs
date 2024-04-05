@@ -14,7 +14,7 @@
          <!-- Nav section -->
          <%- include('layouts/nav'); -%>
 
-         <main>
+         <main class="view-page-main">
             <section>
                 <h1 class="view-pages-heading centered-text">Edit Pages</h1>
          
@@ -37,9 +37,15 @@
                     </tbody>
                 </table>
              
-        
             </section>
-    
+            <div class="submit-cont bottom-right"> 
+                <div>
+                    <form action="/logout" method="GET"> 
+                        <input class="styled-form-checkout-button logout-btn" type="submit" value="Logout" > 
+                    </form>
+                </div>
+            </div>
+
         </main>
 
          <!-- Footer -->

@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const upload = require('express-fileupload');
 let getApp = express();
+const session = require('express-session');
 
 //set directories
 getApp.set('views', path.join(__dirname,'views'));
@@ -32,6 +33,17 @@ const Post = mongoose.model('post', {
     imageSize : Number
 });
 
+const Admin = mongoose.model('Admin', {
+    username : String,
+    password : String,
+});
+
+getApp.use(session({
+    secret: "this ismyrandomsupersecretcode",
+    resave:false,
+    saveUninitialized:true  //session active till logout
+}));
+
 //validation checker
 const {check, validationResult} = require('express-validator');
 
@@ -41,8 +53,47 @@ getApp.get('/',function(req,res) {
     res.render('home'); 
 });
 
+getApp.get('/login',function(req,res) {
+    res.render('login'); 
+});
+
+//login post method
+getApp.post('/login', (req,res) =>{
+
+    let user = req.body.username;
+    let pass =  req.body.password;
+
+    Admin.findOne({username: user, password:pass}).then((admin)=>{
+        console.log(`Admin: ${admin}`);
+        if(admin){
+            //create session for user 
+            req.session.username = admin.username;
+            req.session.userLoggedIn = true;
+            res.redirect('viewPages');
+        }
+        else{
+            //incorrect login
+            res.render('login', {error: "Sorry Login Failed"});
+        }
+    }).catch((err) => {
+
+    })
+})
+
+//logout
+getApp.get('/logout', (req,res)=>{
+    req.session.username = '';
+    req.session.userLoggedIn = false;
+    res.render('success',{message: "Logout successful"} )
+});
+
 getApp.get('/edit',function(req,res) {
-    res.render('editpage'); 
+    //check session exist
+    if(req.session.userLoggedIn){
+        res.render('editpage'); 
+    }else{
+        res.redirect('login');
+    }
 });
 
 getApp.get('/success',function(req,res) {
@@ -51,12 +102,16 @@ getApp.get('/success',function(req,res) {
 
 //view pages
 getApp.get('/viewPages', (req,res) => {
-    Post.find({}).then((pages) => {
-        res.render('viewpages', {pages})
-        console.log(`pages Output: ${pages}`);
-    }). catch((err) => {
-        console.log(`Db Error: ${err}`);
-    })
+    if(req.session.userLoggedIn){
+        Post.find({}).then((pages) => {
+            res.render('viewpages', {pages})
+            console.log(`pages Output: ${pages}`);
+        }). catch((err) => {
+            console.log(`Db Error: ${err}`);
+        })
+    }else{
+        res.redirect('login');
+    }   
 });
 
 

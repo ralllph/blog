@@ -51,21 +51,29 @@
                         </div>
                     </div>
 
-               
+                
     
                 </form>
     
                 <div class="login-div-errors"> 
-                <p id="form-errors" > 
-                    <% if(typeof(errors) != 'undefined') { %>
-                        Errors detected: 
-                      <%  for(let error of errors) { %>
-                            <br><%= error.msg %>
-                       <% } %>
-                    <%} %>
-                </p>
+                    <p id="form-errors" > 
+                        <% if(typeof(errors) != 'undefined') { %>
+                            Errors detected: 
+                        <%  for(let error of errors) { %>
+                                <br><%= error.msg %>
+                        <% } %>
+                        <%} %>
+                    </p>
                 </div>
-            </div>
+
+                <div class="submit-cont edit-logout"> 
+                    <div>
+                        <form action="/logout" method="GET"> 
+                            <input class="styled-form-checkout-button edit-logout-btn" type="submit" value="Logout" > 
+                        </form>
+                    </div>
+                </div>
+         </div>
     
         </main>
 

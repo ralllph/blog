@@ -19,7 +19,7 @@
                 <form action="" class="login-form-content"  name="logins-form" onsubmit="return formSubmit();"  method="post"> 
                     <div>
                         <label for="username">Username:</label>
-                        <input id="username" type="text" placeholder="Surname First Name" name="username"/>
+                        <input id="username" type="text" placeholder="username" name="username" autofocus/>
                      </div>
                      <div>
                         <label for="password">Password:</label>
@@ -28,7 +28,7 @@
     
                      <div class="submit-cont"> 
                         <div>
-                                <input class="styled-form-checkout-button" type="submit" value="submit" > 
+                                <input class="styled-form-checkout-button" type="submit" value="Login" > 
                         </div>
                     </div>
     
@@ -36,11 +36,9 @@
     
                 <div class="login-div-errors"> 
                 <p id="form-errors" > 
-                    <% if(typeof(errors) != 'undefined') { %>
+                    <% if(typeof(error) != 'undefined') { %>
                         Errors detected: 
-                      <%  for(let error of errors) { %>
-                            <br><%= error.msg %>
-                       <% } %>
+                            <br><%= error %>
                     <%} %>
                 </p>
                 </div>
