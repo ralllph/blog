@@ -18,13 +18,19 @@
             <h1>Edit Page</h1>
             <div class="login-form-container">
                 <form action="" class="login-form-content"  name="logins-form" onsubmit="return formSubmit();" enctype="multipart/form-data"  method="post"> 
+                    
                     <div>
                         <label for="pagetitle">Page Title:</label>
-                        <input id="pagetitle" type="text" placeholder="Page Title" name="pagetitle"/>
+                        <input id="pagetitle" type="text" placeholder="Page Title" name="pagetitle" value="<%= page.pageTitle %>"/>
                      </div>
+
                      <div>
                         <label for="fileImage"> Hero Image: </label>
                         <input type="file" class="form-input" name="fileImage" id="fileImage"> <br><br>
+                     </div>
+
+                     <div class="view-page-img-cont">
+                        <img src="/images/<%= page.imageName  %>" alt="previous post image" />
                      </div>
                                <!-- WYSIWYG setup -->
                 <script>
@@ -41,13 +47,13 @@
                     ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
                     });
             </script>
-            <textarea placeholder="What's on your mind....." cols="50" rows="10" name="desc">
-            
+            <textarea  cols="50" rows="10" name="desc" >
+                <%= page.desc %>
             </textarea>
     
                      <div class="submit-cont"> 
                         <div >
-                                <input class="styled-form-checkout-button" type="submit" value="submit" > 
+                                <input class="styled-form-checkout-button" type="submit" value="Update" > 
                         </div>
                     </div>
 

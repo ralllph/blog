@@ -28,9 +28,9 @@
                     <tbody> 
                         <% pages.forEach((page) => { %>
                         <tr>
-                            <td > <%= page.pageTitle %> </td>
-                            <td > <a  class="view-pages-manage-link" href="/edit/<%=page.pageTitle%>" >Edit</a></td>
-                            <td>  <a class="view-pages-manage-link"  href="/delete/<%=page.pageTitle%>">Delete</a></td>
+                            <td >  <a  class="view-pages-manage-link" href="/viewPage/<%= page._id %> " ><%= page.pageTitle %></a></td>
+                            <td > <a  class="view-pages-manage-link" href="/edit/<%=page._id %>" >Edit</a></td>
+                            <td>  <a class="view-pages-manage-link"  href="/delete/<%=page._id%>">Delete</a></td>
                         </tr>
                         <% } ) %>
 
@@ -38,6 +38,7 @@
                 </table>
              
             </section>
+            
             <div class="submit-cont bottom-right"> 
                 <div>
                     <form action="/logout" method="GET"> 

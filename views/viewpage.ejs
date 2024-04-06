@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('layouts/head'); -%>
+    </head>
+<body>
+
+    <div class="home-container">
+
+        <!-- Header -->
+        <%- include('layouts/header'); -%>
+
+         <!-- Nav section -->
+         <%- include('layouts/nav'); -%>
+
+         <!-- Hero section -->
+         <section class="view-single-page-img-section">
+            <div class="view-single-page-img-cont">
+                <img src="/images/<%= page.imageName  %>" alt="post image" />
+            </div>
+        </section>
+
+         <!-- About -->
+         <section class="home-about-section">
+            <h2><%= page.pageTitle %></h2>
+            <%- page.desc %>
+         </section>
+
+         <div class="submit-cont bottom-right"> 
+            <div>
+                <form action="/logout" method="GET"> 
+                    <input class="styled-form-checkout-button logout-btn" type="submit" value="Logout" > 
+                </form>
+            </div>
+        </div>
+
+         <!-- Footer -->
+         <%- include('layouts/footer'); -%>
+     </div>
+     
+
+</body>
+</html>
