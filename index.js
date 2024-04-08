@@ -105,7 +105,7 @@ getApp.get('/logout', (req,res)=>{
     req.session.username = '';
     req.session.userLoggedIn = false;
     res.render('success', { message: {
-        messageTitle: "Success",
+        messageTitle: "Logout Successful",
         isSuccess: true
     }} );
 });
