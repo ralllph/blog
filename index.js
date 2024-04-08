@@ -89,7 +89,10 @@ getApp.post('/login', (req,res) =>{
             //create session for user 
             req.session.username = admin.username;
             req.session.userLoggedIn = true;
-            res.redirect('/');
+            res.render('success', { message: {
+                messageTitle: "Admin Login Successful",
+                isSuccess: true
+            }} );
         }
         else{
             //incorrect login

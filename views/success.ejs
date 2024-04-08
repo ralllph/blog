@@ -18,9 +18,9 @@
         </div>
             <h1 class="success-message">Success</h1> 
             <% if (message.isEdit) { %>
-              <p><strong><%= message.messageTitle %></strong>  <a href="/<%= message.isLinkEdit %>">here</a></p>
+              <p><strong><%= message.messageTitle %></strong>  <a id="success-link" href="/<%= message.isLinkEdit %>">here</a></p>
           <% } else { %>
-              <p><strong><%= message.messageTitle %></strong>  Return to <a href="/">home</a></p>
+              <p><strong><%= message.messageTitle %></strong>  Return to <a id="success-link" href="/">home</a></p>
           <% } %>
           
         </div>

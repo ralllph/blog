@@ -290,6 +290,13 @@ i {
       margin: 0;
   }
 
+#success-link{
+    text-decoration: underline;
+}
+#success-link:hover{
+    color: red;
+}
+
 .home-link{
     text-decoration: none;
     color: purple;
