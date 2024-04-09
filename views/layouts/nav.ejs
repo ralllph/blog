@@ -6,6 +6,10 @@
            <li>
                 <a href="/viewPages" class="home-nav-link">Manage Posts</a>
             </li>
-            <li> <a href="#" class="home-nav-link">Contact</a></li>
+            <% if (navs && navs.length > 0) {  %>
+            <% navs.forEach((nav) => { %>
+                    <li>  <a  class="home-nav-link" href="/viewPage/<%= nav.pageId%> " ><%= nav.pageTitle %></a> </li>
+                <% } ) %>
+            <% } %>
         </ul>
     </nav>

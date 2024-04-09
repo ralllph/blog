@@ -38,6 +38,11 @@ const Admin = mongoose.model('Admin', {
     password : String,
 });
 
+const Navigations = mongoose.model('Navigations', {
+    pageTitle : String,
+    pageId:String
+});
+
 getApp.use(session({
     secret: "this ismyrandomsupersecretcode",
     resave:false,
@@ -47,14 +52,22 @@ getApp.use(session({
 //validation checker
 const {check, validationResult} = require('express-validator');
 
+//Navigation bar object for all routes
+let globalNavs = [];
 
 // Set Different Routes
 getApp.get('/',function(req,res) {
-    res.render('home'); 
+    Navigations.find({}).then((navs) => {
+        globalNavs= navs;
+        res.render('home', {navs:navs});
+        console.log(`Navs Output: ${navs}`);
+    }). catch((err) => {
+        console.log(`Db Error: ${err}`);
+    })
 });
 
 getApp.get('/login',function(req,res) {
-    res.render('login'); 
+    res.render('login', {navs:globalNavs}); 
 });
 
 getApp.get('/viewPage/:id',function(req,res) {
@@ -64,7 +77,8 @@ getApp.get('/viewPage/:id',function(req,res) {
         //get data based on id
         Post.findById({_id : id}).then((page) => {
             if(page){
-                res.render('viewpage', {page : page});
+                console.log("Global here",globalNavs);
+                res.render('viewpage', {page : page ,navs:globalNavs });
             }else{
                 res.send('No Page Found With This Id!');
             }
@@ -92,7 +106,7 @@ getApp.post('/login', (req,res) =>{
             res.render('success', { message: {
                 messageTitle: "Admin Login Successful",
                 isSuccess: true
-            }} );
+            }, navs:globalNavs} );
         }
         else{
             //incorrect login
@@ -120,7 +134,7 @@ getApp.get('/edit/:id',function(req,res) {
         //get data based on id
         Post.findById({_id : id}).then((page) => {
             if(page){
-                res.render('editpage', {page : page});
+                res.render('editpage', {page : page,navs:globalNavs});
             }else{
                 res.send('No Order Found With This Id!');
             }
@@ -145,7 +159,7 @@ getApp.post('/edit/:id', [
 
         Post.findById({_id : id}).then((page) => {
             if(page){
-                res.render('editpage', {page : page, errors : errors.array()});
+                res.render('editpage', {page : page, errors : errors.array(),navs:globalNavs});
             }else{
                 res.send('No Order Found With This Id!');
             }
@@ -184,6 +198,7 @@ getApp.post('/edit/:id', [
     }
     
     function updatePage(postData) {
+        //update Post by id
         Post.findById({_id: id}).then((page) => {
             page.pageTitle = postData.pageTitle;
             page.desc = postData.desc;
@@ -194,6 +209,18 @@ getApp.post('/edit/:id', [
             }
             page.save().then(function () {
                 console.log("Page Updated Successfully!");
+
+             //update nav 
+            Navigations.findOne({pageId: id}).then((nav) => {
+                nav.pageTitle = postData.pageTitle;
+                nav.save().then(function () {
+                    globalNavs= nav;
+                    console.log("Nav Updated Successfully!");
+                }).catch(function (ex) {
+                    console.log(`Database Error, Nav not updated: ${ex.toString()}`);
+                });
+            });
+            
             }).catch(function (ex) {
                 console.log(`Database Error: ${ex.toString()}`);
                 res.render('success', {message : {
@@ -212,6 +239,7 @@ getApp.post('/edit/:id', [
             }});
             
         });
+
     }
     
 });
@@ -221,6 +249,7 @@ getApp.get('/delete/:id', (req, res) => {
     if(req.session.userLoggedIn) {
         // Read Object Id of Database Document
         let id = req.params.id;
+        //delete post
         Post.findByIdAndDelete({_id : id}).then((page) => {
             console.log(`page : ${page}`);
             if(page) {
@@ -232,11 +261,18 @@ getApp.get('/delete/:id', (req, res) => {
             }
             else {
                 res.render('success', {message : {
-                    messageTitle: "FFailed",
+                    messageTitle: "Failed",
                     isSuccess: false,
                     messageTitle: "Post Delete Failed,, Try again later" 
                 }});
             }
+        }).catch((err) => {
+            console.log(`Error : ${err}`);
+        });
+
+        //delete from navigation
+        Navigations.findOneAndDelete({pageId : id}).then((nav) => {
+            console.log(`nav deleted : ${nav}`);
         }).catch((err) => {
             console.log(`Error : ${err}`);
         });
@@ -255,7 +291,7 @@ getApp.get('/success',function(req,res) {
 getApp.get('/viewPages', (req,res) => {
     if(req.session.userLoggedIn){
         Post.find({}).then((pages) => {
-            res.render('viewpages', {pages})
+            res.render('viewpages', {pages,navs:globalNavs})
             console.log(`pages Output: ${pages}`);
         }). catch((err) => {
             console.log(`Db Error: ${err}`);
@@ -268,7 +304,7 @@ getApp.get('/viewPages', (req,res) => {
 
 getApp.get('/addPosts',function(req,res) {
     if(req.session.userLoggedIn){
-        res.render('addposts'); 
+        res.render('addposts',{navs:globalNavs}); 
     }else {
         res.redirect('/login');
     }
@@ -283,7 +319,7 @@ getApp.post('/addPosts', [
     console.log(errors);
 
     if(!errors.isEmpty()) {
-       res.render('addPosts', {errors : errors.array()})
+       res.render('addPosts', {errors : errors.array(),navs:globalNavs})
     }
     else 
     {
@@ -306,12 +342,23 @@ getApp.post('/addPosts', [
                     imageType : image.mimetype,
                     imageSize : image.size
                 }
-    
-                // Save Data Into Database
+
+                // Save Data Into Navigation and Posts  Database
                 let newPost = new Post(postData);
                 newPost.save().then(function(){
                     console.log("File Data Saved in Database!");
                 });
+
+                let navData={ 
+                    pageTitle : pageTitle,
+                    pageId: newPost.id
+                };
+
+                let newNav = new Navigations(navData);
+                newNav.save().then(function(){
+                    console.log("File Data Saved in Database!");
+                });
+
     
                 // Display Output
                
