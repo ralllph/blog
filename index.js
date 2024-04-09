@@ -110,10 +110,10 @@ getApp.post('/login', (req,res) =>{
         }
         else{
             //incorrect login
-            res.render('login', {error: "Sorry Login Failed"});
+            res.render('login', {error: "Sorry Login Failed",navs:globalNavs });
         }
     }).catch((err) => {
-
+        console.log(err);
     })
 })
 
@@ -220,7 +220,7 @@ getApp.post('/edit/:id', [
                     console.log(`Database Error, Nav not updated: ${ex.toString()}`);
                 });
             });
-            
+
             }).catch(function (ex) {
                 console.log(`Database Error: ${ex.toString()}`);
                 res.render('success', {message : {
